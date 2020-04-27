@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+.Header-app {
+  background-color: #61dafb;
+  color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
