@@ -1,72 +1,39 @@
 import React from "react";
-import { Header, DEFAULT_TITLE } from "./components/Header";
-import Filtro from "./components/Filtro";
-import SelectPaises from "./components/SelectPaises";
-import EjemploInput from "./components/EjemploInput";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { ROUTES } from "./routes";
+import { Header, DEFAULT_TITLE } from "./components/Header/Header";
+import { Day1, Day2, Paises, Posts } from "./pages";
 import "./App.css";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputValue: "",
-      userName: "guest",
-      role: "guest",
-    };
-  }
+const App = () => {
+  const titulo = "Aplicacion";
+  const userName = "mLopez";
 
-  componentWillUnmount() {
-    console.log("componente App desmontado");
-  }
+  const Welcome = () => <React.Fragment>Bienvenido Curso React</React.Fragment>;
+  const NotFoundPage = () => <>404 pagina no existe</>;
 
-  componentDidMount() {
-    console.log("login usuario");
-    this.setState({ userName: "lperez" });
-  }
+  const Comments = ({ match: { params } }) => (
+    <>{`comentarios post ${params.id}`}</>
+  );
 
-  handleLogin() {
-    this.setState({ userName: "martaSanchez", role: "admin" });
-  }
-
-  handleChangeInputValue(e) {
-    console.log(e.target.value);
-    this.setState({ inputValue: e.target.value });
-  }
-
-  render() {
-    const handleLogin2 = () => {
-      this.setState({ userName: "martaSanchez", role: "admin" });
-    };
-    const { role, userName, inputValue } = this.state; //deconstruct
-    const { handleChangeInputValue } = this;
-    console.log("estado de la App: ", this.state);
-    const titulo = "Paises";
-    const numbers = [1, 2, 3, 4, 6];
-    return (
+  return (
+    <BrowserRouter>
       <div className="App">
         <Header titulo={titulo} colorx="red" userName={userName} />
-        <button onClick={handleLogin2}>Login</button>
-        <br />
-        {role === "admin" && <button>admin option</button>}
-        <button
-        // onclick={role === "admin" ? handleAdmin : handleGuest}
-        >
-          {role === "admin" ? "admin opcion" : "guest option"}
-        </button>
-        {/* {!!numero && <componente />} */}
-        <br />
-        {numbers.map((number) => (
-          <div key={number}>{number}</div>
-        ))}
-        <EjemploInput
-          value={inputValue}
-          onChangeInput={handleChangeInputValue.bind(this)}
-        />
-        <Filtro />
-        <SelectPaises />
+        <Switch>
+          <Route exact path={ROUTES.HOME} component={Welcome} />
+          <Route path={ROUTES.DAY1} component={Day1} />
+          <Route path={ROUTES.DAY2} component={Day2} />
+          <Route path={ROUTES.PAISES} component={Paises} />
+          <Route path={ROUTES.POSTS} component={Posts} />
+          <Route path={"/comments/:id"} component={Comments} />
+
+          <Route component={NotFoundPage} />
+          {/* <Redirect to="/" /> */}
+        </Switch>
       </div>
-    );
-  }
-}
+    </BrowserRouter>
+  );
+};
 
 export default App;

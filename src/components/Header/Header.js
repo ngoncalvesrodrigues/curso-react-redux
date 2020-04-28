@@ -1,5 +1,6 @@
 import React from "react";
 import { DEFAULT_TITLE } from "./Header.constants";
+import { LinksNavegacion } from "./LinksNavegacion";
 import { DEFAULT_MENU_COLOR } from "../../theme";
 
 export const Header = ({
@@ -19,6 +20,7 @@ export const Header = ({
   return (
     <div style={headerStyle} classNamex="Header-app">
       <div>{titulo}</div>
+      <LinksNavegacion />
       <div>{userName}</div>
     </div>
   );
