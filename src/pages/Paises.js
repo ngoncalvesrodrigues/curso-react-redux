@@ -5,6 +5,7 @@ import SelectPaises from "../components/SelectPaises";
 const Paises = () => {
   const [paises, setPaises] = useState([]);
   const [paisSeleccionado, setPaisSeleccionado] = useState(null);
+  // setTitulo('Paises')
   // componentDidMount
   useEffect(() => {
     console.log("Carga de paises");

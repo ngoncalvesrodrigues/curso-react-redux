@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import * as api from "../../api";
+import SelectPosts from "../../components/SelectPost";
+import DetailPost from "../../components/DetailPost";
 
 export const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => setPosts(response.data));
+    api.getPosts().then((data) => {
+      setPosts(data);
+      api.getPost(data[0].id).then((data) => setSelectedPost(data));
+      //setSelectedPost(data[0]);
+    });
   }, []);
 
-  const SelectPosts = ({ posts }) => (
-    <select>
-      {posts.map(({ id, title }) => (
-        <option key={id} value={id}>
-          {title}
-        </option>
-      ))}
-    </select>
-  );
-
-  const DetailPost = ({ post }) => <div>Detalle Posts</div>;
+  const handleSelectPost = (id) => {
+    api.getPost(id).then((data) => setSelectedPost(data));
+    //setSelectedPost(posts.find((post) => `${post.id}` === id));
+  };
 
   return (
     <div>
-      <SelectPosts posts={posts} />
-      <DetailPost post={selectedPost} />
+      <SelectPosts posts={posts} onSelectPost={handleSelectPost} />
+      {selectedPost && <DetailPost post={selectedPost} />}
     </div>
   );
 };
