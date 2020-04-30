@@ -35,6 +35,14 @@
   margin-bottom: 1rem;
 }
 
+.Error {
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: 0.1rem;
+  background-color: red;
+  color: white;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

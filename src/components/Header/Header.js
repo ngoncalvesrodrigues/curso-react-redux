@@ -1,13 +1,10 @@
 import React from "react";
-import { DEFAULT_TITLE } from "./Header.constants";
+import { useSelector } from "react-redux";
 import { LinksNavegacion } from "./LinksNavegacion";
 import { DEFAULT_MENU_COLOR } from "../../theme";
 
-export const Header = ({
-  titulo = DEFAULT_TITLE,
-  color = DEFAULT_MENU_COLOR,
-  userName = "",
-}) => {
+export const Header = ({ color = DEFAULT_MENU_COLOR, userName = "" }) => {
+  const title = useSelector((state) => state.header.title);
   const headerStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -19,7 +16,7 @@ export const Header = ({
   console.log("header - usuario: ", userName);
   return (
     <div style={headerStyle} classNamex="Header-app">
-      <div>{titulo}</div>
+      <div>{title}</div>
       <LinksNavegacion />
       <div>{userName}</div>
     </div>

@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import * as api from "../../api";
+import { setTitle } from "../../store/actions/header";
 import SelectPosts from "../../components/SelectPost";
 import DetailPost from "../../components/DetailPost";
 
 export const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setTitle("POSTS"));
     api.getPosts().then((data) => {
       setPosts(data);
       api.getPost(data[0].id).then((data) => setSelectedPost(data));

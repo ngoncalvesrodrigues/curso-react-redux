@@ -2,13 +2,14 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { ROUTES } from "../../routes";
 
-const DetailPost = ({ post: { userId, id, title, body } }) => {
+const DetailPost = ({ post: { userId, id, title, body }, post2 = false }) => {
   const history = useHistory();
   const myStyle = { marginTop: "1rem" };
 
   const verComentarios = (e) => {
     e.preventDefault();
-    history.push(`${ROUTES.COMMENTS}/${id}`);
+    const rutaComentarios = post2 ? ROUTES.COMMENTS2 : ROUTES.COMMENTS;
+    history.push(`${rutaComentarios}/${id}`);
   };
 
   return (

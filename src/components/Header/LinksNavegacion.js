@@ -1,28 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../../routes";
+import { LINKS } from "./Header.constants";
 
 export const LinksNavegacion = () => {
   const styleLink = {
     padding: "1rem",
   };
+
   return (
     <div>
-      <Link style={styleLink} to={ROUTES.HOME}>
-        Home
-      </Link>
-      <Link style={styleLink} to={ROUTES.DAY1}>
-        Day1
-      </Link>
-      <Link style={styleLink} to={ROUTES.DAY2}>
-        Day2
-      </Link>
-      <Link style={styleLink} to={ROUTES.PAISES}>
-        Paises
-      </Link>
-      <Link style={styleLink} to={ROUTES.POSTS}>
-        Posts
-      </Link>
+      {LINKS.map(({ ruta, texto }, index) => (
+        <Link key={index} style={styleLink} to={ruta}>
+          {texto}
+        </Link>
+      ))}
     </div>
   );
 };

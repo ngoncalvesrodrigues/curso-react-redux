@@ -12,11 +12,16 @@ export const getComments = (postId) =>
       // console.log(err.response.data);
       // console.log(err.response.headers);
       // generar log
+      // procesamiento del error
       throw new Error("Mi mensaje de error");
     });
 
 export const getPosts = () =>
+  // renombrar como getPostList()
   axios.get(`${baseURL}/posts`).then((res) => res.data); // parsing complejo
 
 export const getPost = (id) =>
   axios.get(`${baseURL}/posts/${id}`).then((res) => res.data); // parsing complejo
+// .catch((err) => {
+//   throw new Error("Error Leyendo detalle de posts");
+// });

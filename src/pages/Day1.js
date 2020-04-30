@@ -20,9 +20,6 @@ class Day1 extends React.Component {
   componentDidMount() {
     console.log("login usuario");
     this.setState({ userName: "lperez" });
-    //
-
-    //getPosts().then((data) => this.setState({ posts: data }));
   }
 
   handleLogin() {
@@ -41,7 +38,6 @@ class Day1 extends React.Component {
     const { role, userName, inputValue } = this.state; //deconstruct
     const { handleChangeInputValue } = this;
     console.log("estado de la App: ", this.state);
-    const titulo = "Paises";
     const numbers = [1, 2, 3, 4, 6];
     return (
       <div className="App">
